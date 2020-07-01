@@ -1,17 +1,15 @@
 const express = require('express');
-const exphbs = require('express-handlebars');
-const bodyParser = require('body-parser');
-const path = require('path');
-const sequelize = require('./config/database');
+require('./database');
+const Job = require('./app/models/Job');
 
 const app = express();
 
+app.use(express.json());
 
 app.get('/', (req, res) => {
-    
-    res.send('Hello')
+    res.send('Hello');
 });
 
-app.use('/gigs', require('./routes/gigs.routes'));
+app.use('/jobs', require('./routes/jobs.routes'));
 
 app.listen(3333, () => console.log('Server running on port 3333...'));
