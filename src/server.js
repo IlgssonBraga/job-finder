@@ -1,15 +1,12 @@
+require('dotenv').config();
 const express = require('express');
 require('./database');
-const Job = require('./app/models/Job');
 
 const app = express();
+const PORT = process.env.PORT || 3333;
 
 app.use(express.json());
 
-app.get('/', (req, res) => {
-    res.send('Hello');
-});
+app.use(require('./routes/index.routes'));
 
-app.use('/jobs', require('./routes/jobs.routes'));
-
-app.listen(3333, () => console.log('Server running on port 3333...'));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}...`));
